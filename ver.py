@@ -20,4 +20,8 @@ print(len(X))
 print(len(y),y)
 
 response = requests.get('http://localhost:9090/api/v1/query?query=up')
+print('aca')
 print(response.json()['data']['result'][0]['value'])
+print('aca2')
+response2 = requests.get('https://localhost:9443/magma/v1/lte/uniandes_network_01/subscribers/IMSI901700100001113',cert=('../../admin_operator.pem','../../admin_operator.pem'),verify=False)
+print(response2.json())
