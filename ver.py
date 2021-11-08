@@ -29,9 +29,10 @@ print(len(y),y)
 
 network_id = 'uniandes_network_01'
 subscriber_id = 'IMSI901700100001113'
+pemPath = '../../admin_operator.pem'
 
 def upgradeBandwidth(network_id, subscriber_id):
-    response2 = requests.get('https://localhost:9443/magma/v1/lte/'+ network_id +'/subscribers/'+ subscriber_id,cert=('../../admin_operator.pem','../../admin_operator.pem'),verify=False)
+    response2 = requests.get('https://localhost:9443/magma/v1/lte/'+ network_id +'/subscribers/'+ subscriber_id,cert=(pemPath, pemPath),verify=False)
     data = response2.json()
     currentPolicy = data['active_policies'][0]
     if currentPolicy == 'low_policy': 
@@ -53,7 +54,7 @@ def upgradeBandwidth(network_id, subscriber_id):
     responseUpgrade = requests.put('https://localhost:9443/magma/v1/lte/'+ network_id +'/subscribers/'+ subscriber_id,headers=headers,data=requestBody,cert=('../../admin_operator.pem','../../admin_operator.pem'),verify=False)
 
 def downgradeBandwidth(network_id, subscriber_id):
-    response2 = requests.get('https://localhost:9443/magma/v1/lte/'+ network_id +'/subscribers/'+ subscriber_id,cert=('../../admin_operator.pem','../../admin_operator.pem'),verify=False)
+    response2 = requests.get('https://localhost:9443/magma/v1/lte/'+ network_id +'/subscribers/'+ subscriber_id,cert=(pemPath, pemPath),verify=False)
     data = response2.json()
     currentPolicy = data['active_policies'][0]
     if currentPolicy == 'low_policy': 
