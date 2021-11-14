@@ -14,17 +14,8 @@ pipe = make_pipeline(
 )
 
 def trainModel():
-    print(varValues)
-    print(resValues)
-
-    # load the iris dataset and split it into train and test sets
     X_train, X_test, y_train, y_test = train_test_split(varValues, resValues, random_state=0)
-
-    # fit the whole pipeline
     pipe.fit(X_train, y_train)
-
-
-    # we can now use it like any other estimator
     res = accuracy_score(pipe.predict(X_test), y_test)
     print(res)
 
@@ -32,5 +23,7 @@ def runModel():
     trainModel()
     print(pipe.predict([[200,150,100]]))
     for x in range(6):
-        getThroughputRange()
+        throughputRange = getThroughputRange()
+        res = pipe.predict([throughputRange])[0]
+        print(res)
         time.sleep(7)
