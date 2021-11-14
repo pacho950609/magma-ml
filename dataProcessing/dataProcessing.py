@@ -8,13 +8,13 @@ OutThroughputQuery = 'avg(rate(ue_reported_usage{IMSI="IMSI901700100001111",dire
 
 
 def transformThroughput(throughputRange):
-    return list(map(lambda throughput: throughput[1], throughputRange))
+    return list(map(lambda throughput: float(throughput[1]), throughputRange))
 
 
 def getThroughputRange():
     end = time.time()
     start = end - 180
-    path = URL + '/api/v1/query_range?query='+ OutThroughputQuery +'&start='+ str(start) + '&end='+ str(end) +'&step=10'
+    path = URL + '/api/v1/query_range?query='+ OutThroughputQuery +'&start='+ str(start) + '&end='+ str(end) +'&step=80'
     print('Throughput path: ' + path)
     response = requests.get(path)
     throughputRange = response.json()['data']['result'][0]['values']
@@ -23,3 +23,4 @@ def getThroughputRange():
     transformedThroughput = transformThroughput(throughputRange)
     print('Transformed throughput:')
     print(transformedThroughput)
+    return transformedThroughput

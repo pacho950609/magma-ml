@@ -7,6 +7,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import time
+from integration.integration import upgradeBandwidthCall
 
 pipe = make_pipeline(
     StandardScaler(),
@@ -21,9 +22,13 @@ def trainModel():
 
 def runModel():
     trainModel()
-    print(pipe.predict([[200,150,100]]))
     for x in range(6):
         throughputRange = getThroughputRange()
         res = pipe.predict([throughputRange])[0]
+        print('prediction:')
         print(res)
+        if(res == 0):
+            print('Call upgrade bandwidth')
+            upgradeBandwidthCall()
+        
         time.sleep(7)
