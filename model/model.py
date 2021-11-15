@@ -22,10 +22,11 @@ def trainModel():
 
 def runModel():
     trainModel()
-    for x in range(6):
+    for x in range(100):
         throughputRange = getThroughputRange()
-        res = pipe.predict([throughputRange])[0]
-        print('prediction:')
-        print(res)
-        processPrediction(res)
-        time.sleep(7)
+        if len(throughputRange) > 0:
+            res = pipe.predict([throughputRange])[0]
+            print('prediction:')
+            print(res)
+            processPrediction(res)
+        time.sleep(10)
