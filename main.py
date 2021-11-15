@@ -1,3 +1,4 @@
-from model.model import runModel
-runModel()
+from model.model import runModel, runModelRange
+runModelRange()
+
 
